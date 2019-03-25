@@ -102,6 +102,7 @@
 				4BC202942247D772003787F1 /* NetworkManager */,
 				4B4FD90D224798F700D4675C /* DatabaseManager */,
 				4BC2028B22479AF1003787F1 /* Models */,
+				4BC2028C22479C24003787F1 /* NotificationModel.swift */,
 				4BDFE1F522477F2500264BA1 /* Views */,
 				4B4F543F2246E7130000542F /* Main.storyboard */,
 				4B4F54422246E7160000542F /* Assets.xcassets */,
@@ -132,7 +133,6 @@
 		4BC2028B22479AF1003787F1 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4BC2028C22479C24003787F1 /* NotificationModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

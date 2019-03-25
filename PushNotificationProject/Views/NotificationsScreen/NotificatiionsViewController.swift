@@ -31,14 +31,13 @@ class NotificationsViewController:
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         databaseManager = DatabaseManager()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        items = databaseManager.getObjects(with: NotificationModel.self)
+        items = databaseManager.getObjects(with: NotificationModel.self)?.sorted(by: { $0.date > $1.date })
     }
 
     
