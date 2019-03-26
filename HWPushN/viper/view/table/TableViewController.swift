@@ -22,6 +22,7 @@ class TableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         let array = dataManager.obtainNotifications() ?? []
+        
         for arr in array {
             notifications.insert(arr, at: 0)
         }
@@ -30,12 +31,10 @@ class TableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return notifications.count
     }
     
@@ -50,10 +49,10 @@ class TableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! TableViewCell
         
         if let url = URL(string: notifications[indexPath.row].image) {
-        
             cell.photoImageView.sd_setImage(with: url, completed: nil)
         }
         
@@ -64,7 +63,6 @@ class TableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         performSegue(withIdentifier: "toDetail", sender: notifications[indexPath.row])
     }
 }

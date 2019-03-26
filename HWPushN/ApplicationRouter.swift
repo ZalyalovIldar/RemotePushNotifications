@@ -17,16 +17,9 @@ class ApplicationRouter {
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let dataManager = DataManager()
     
-    func openController(with color: UIColor) {
-        
-        let controller = storyboard.instantiateViewController(withIdentifier: detailVC)
-        
-        controller.view.backgroundColor = color
-        
-        UIApplication.shared.keyWindow?.rootViewController = controller
-        UIApplication.shared.keyWindow?.makeKey()
-    }
-    
+    /// Метод, срабатывающий при нажатии на нотификацию
+    ///
+    /// - Parameter dict: userInfo в виде словаря
     func didPressedPushNotification(dict: NSDictionary) {
         
         let tabBarVC = storyboard.instantiateViewController(withIdentifier: "tabbar") as! UITabBarController
@@ -34,10 +27,13 @@ class ApplicationRouter {
         let notificationModel = NotificationModel()
         
         if let aps = dict["aps"] as? NSDictionary {
+            
             if let alert = aps["alert"] as? NSDictionary {
+            
                 if let title = alert["title"] as? NSString {
                     notificationModel.title = title as String
                 }
+                
                 if let body = alert["body"] as? NSString {
                     notificationModel.descriptionInfo = body as String
                 }
@@ -66,12 +62,17 @@ class ApplicationRouter {
         UIApplication.shared.keyWindow?.makeKey()
     }
     
+    /// Получение последнего id моделей
+    ///
+    /// - Returns: Последний id
     func getLastId() -> Int {
         
         var id = 0
         
         if let notifArray = dataManager.obtainNotifications() {
+            
             for notif in notifArray {
+            
                 if notif.id > id {
                     id = notif.id
                 }

@@ -9,15 +9,13 @@
 import Foundation
 import RealmSwift
 
-class DataManager: DataManagerProtocol {
-    
+class DataManager {
     
     fileprivate lazy var mainRealm: Realm = try! Realm(configuration: .defaultConfiguration)
     
-    func saveData(model: Object) {
-        
-    }
-    
+    /// Сохранить модель в Realm
+    ///
+    /// - Parameter item: модель, которую нужно сохранить
     func saveItem(item: Object) {
         
         try! mainRealm.write {
@@ -25,12 +23,17 @@ class DataManager: DataManagerProtocol {
         }
     }
     
+    /// Получить все модели уведомлений
+    ///
+    /// - Returns: массив моделей уведомлений
     func obtainNotifications() -> [NotificationModel]? {
         
         var array: [NotificationModel]?
+        
         try! mainRealm.write {
             array = Array(mainRealm.objects(NotificationModel.self))
         }
+        
         return array
     }
 }

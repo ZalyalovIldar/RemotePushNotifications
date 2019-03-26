@@ -15,6 +15,7 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
     
     var notificationCenter = UNUserNotificationCenter.current()
     
+    /// настройка конфигураций уведомления
     func configureRemoteNotifications() {
         
         notificationCenter.delegate = self
@@ -32,6 +33,7 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
         }
     }
     
+    /// Настройка действий над уведомлением
     func configureNotification() {
         
         let categoryId = "myActions"
@@ -52,11 +54,13 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
         notificationCenter.setNotificationCategories([category])
     }
     
+    /// Проверка статуса настроек уведомлений
     func checkRemoteNoficationsStatus() {
         
         notificationCenter.getNotificationSettings { (settings) in
             
             switch settings.alertSetting {
+                
             case .enabled:
                 
                 DispatchQueue.main.async {
