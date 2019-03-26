@@ -15,7 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var window: UIWindow?
     var remoteNotificationManager = PushNManager()
     var applicationRouter = ApplicationRouter()
-
+    let errorId = "Error: "
+    let token = "Token: "
+    let formatId = "%02.2hhx"
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -56,14 +58,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        let deviceTokenString = deviceToken.map { String(format: "%02.2hhx", $0) }.joined()
+        let deviceTokenString = deviceToken.map { String(format: formatId, $0) }.joined()
         
-        print("Token: \(deviceTokenString)")
+        print(token + deviceTokenString)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
-        print("Error register: \(error.localizedDescription)")
+        print(errorId + error.localizedDescription)
     }
     
     // This method will be called when app received push notifications in foreground

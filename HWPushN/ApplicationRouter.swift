@@ -16,31 +16,38 @@ class ApplicationRouter {
     let tableVC = "tableVC"
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     let dataManager = DataManager()
+    let aps = "aps"
+    let alertId = "alert"
+    let titleId = "title"
+    let bodyId = "body"
+    let urlImageString = "urlImageString"
+    let tabbar = "tabbar"
+    let toDetail = "toDetail"
     
     /// Метод, срабатывающий при нажатии на нотификацию
     ///
     /// - Parameter dict: userInfo в виде словаря
     func didPressedPushNotification(dict: NSDictionary) {
         
-        let tabBarVC = storyboard.instantiateViewController(withIdentifier: "tabbar") as! UITabBarController
+        let tabBarVC = storyboard.instantiateViewController(withIdentifier: tabbar) as! UITabBarController
         
         let notificationModel = NotificationModel()
         
-        if let aps = dict["aps"] as? NSDictionary {
+        if let aps = dict[aps] as? NSDictionary {
             
-            if let alert = aps["alert"] as? NSDictionary {
+            if let alert = aps[alertId] as? NSDictionary {
             
-                if let title = alert["title"] as? NSString {
+                if let title = alert[titleId] as? NSString {
                     notificationModel.title = title as String
                 }
                 
-                if let body = alert["body"] as? NSString {
+                if let body = alert[bodyId] as? NSString {
                     notificationModel.descriptionInfo = body as String
                 }
             }
         }
         
-        if let img = dict["urlImageString"] as? NSString {
+        if let img = dict[urlImageString] as? NSString {
             notificationModel.image = (img as String)
         }
         
@@ -57,7 +64,7 @@ class ApplicationRouter {
         
         photoVC.notificationModel = notificationModel
         
-        notificationVC.performSegue(withIdentifier: "toDetail", sender: notificationModel)
+        notificationVC.performSegue(withIdentifier: toDetail, sender: notificationModel)
         
         UIApplication.shared.keyWindow?.makeKey()
     }

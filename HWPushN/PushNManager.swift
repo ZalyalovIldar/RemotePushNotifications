@@ -14,6 +14,13 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
     
     
     var notificationCenter = UNUserNotificationCenter.current()
+    let disabledId = "Disabled"
+    let errorId = "Error: "
+    let categoryId = "myActions"
+    let okId = "okAction"
+    let ok = "OK"
+    let removeId = "removeAction"
+    let remove = "Remove"
     
     /// настройка конфигураций уведомления
     func configureRemoteNotifications() {
@@ -24,7 +31,7 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
             
             if let error = error {
                 
-                print("Error: \(error.localizedDescription)")
+                print(self!.errorId + error.localizedDescription)
             }
             else {
                 self?.checkRemoteNoficationsStatus()
@@ -36,13 +43,11 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
     /// Настройка действий над уведомлением
     func configureNotification() {
         
-        let categoryId = "myActions"
-        
-        let okAction = UNNotificationAction(identifier: "okAction",
-                                            title: "OK",
+        let okAction = UNNotificationAction(identifier: self.okId,
+                                            title: self.ok,
                                             options: .foreground)
-        let remove = UNNotificationAction(identifier: "removeAction",
-                                          title: "Remove",
+        let remove = UNNotificationAction(identifier: self.removeId,
+                                          title: self.remove,
                                           options: .destructive)
         
         let category = UNNotificationCategory(
@@ -68,7 +73,7 @@ class PushNManager: NSObject, UNUserNotificationCenterDelegate {
                 }
                 
             case .disabled:
-                print("DisEnabled")
+                print(self.disabledId)
                 
             default: break
             }
