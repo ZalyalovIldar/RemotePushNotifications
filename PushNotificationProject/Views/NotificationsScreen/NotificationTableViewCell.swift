@@ -29,20 +29,22 @@ class NotificationTableViewCell: UITableViewCell {
         titleLabel.text = notification.title
         
         guard let imageURL = URL(string: notification.imageURL) else { return }
+        
+        setImage(with: imageURL)
     }
 
     private func setImage(with url: URL) {
         
-        networkManager.obtainImage(with: imageURL) { [weak self] (result) in
+        networkManager.obtainImage(with: url) { [weak self] (result) in
             
             switch result {
                 
-            case .Success(let data):
+            case .success(let data):
                 DispatchQueue.main.async {
                     self?.iconImageView.image = UIImage(data: data)
                 }
                 
-            case .Error(let error):
+            case .error(let error):
                 print(error.localizedCapitalized)
                 
             }

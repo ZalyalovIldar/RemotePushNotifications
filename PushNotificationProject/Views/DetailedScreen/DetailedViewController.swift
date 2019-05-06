@@ -32,26 +32,29 @@ class DetailedViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let model = currentModel {
-            titleLabel.text = model.title
-            textLabel.text = model.text
+        guard  let model = currentModel else { return }
+        titleLabel.text = model.title
+        textLabel.text = model.text
             
-            if let imageURL = URL(string: model.imageURL) {
-                
-                networkManager.obtainImage(with: imageURL) { [weak self] (result) in
-                    
-                    switch result {
-                        
-                    case .Success(let data):
-                        DispatchQueue.main.async {
-                            self?.imageView.image = UIImage(data: data)
-                        }
+        guard let imageURL = URL(string: model.imageURL) else { return }
 
-                    case .Error(let error):
-                        print(error.localizedCapitalized)
-                        
-                    }
+        setImage(with: imageURL)
+    }
+    
+    private func setImage(with url: URL) {
+        
+        networkManager.obtainImage(with: url) { [weak self] (result) in
+            
+            switch result {
+                
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self?.imageView.image = UIImage(data: data)
                 }
+                
+            case .error(let error):
+                print(error.localizedCapitalized)
+                
             }
         }
     }

@@ -16,11 +16,11 @@ class NetworkManager: NetworkManagerProtocol {
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             
             if let error = error {
-                completionBlock(.Error(error: error.localizedDescription))
+                completionBlock(.error(error: error.localizedDescription))
             }
             else {
                 DispatchQueue.main.async {
-                    completionBlock(.Success(imageData: data!))
+                    completionBlock(.success(imageData: data!))
                 }
             }
         }.resume()
