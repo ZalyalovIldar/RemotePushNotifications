@@ -30,7 +30,7 @@ class NotificationsViewController:
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         databaseManager = DatabaseManager()
     }
     

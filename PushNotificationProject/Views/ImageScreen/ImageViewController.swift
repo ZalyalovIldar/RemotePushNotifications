@@ -26,23 +26,25 @@ class ImageViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        guard let imageURLString = imageURLString else { return }
+        guard let imageURLString = imageURLString, let imageURL = URL(string: imageURLString)else { return }
+ 
+        setImage(with: imageURL)
+    }
+    
+    private func setImage(with url: URL) {
         
-        if let imageURL = URL(string: imageURLString) {
+        networkManager.obtainImage(with: imageURL) { [weak self] (result) in
             
-            networkManager.obtainImage(with: imageURL) { [weak self] (result) in
+            switch result {
                 
-                switch result {
-                    
-                case .Success(let data):
-                    DispatchQueue.main.async {
-                        self?.notificationImageView.image = UIImage(data: data)
-                    }
-                    
-                case .Error(let error):
-                    print(error.localizedCapitalized)
-                    
+            case .Success(let data):
+                DispatchQueue.main.async {
+                    self?.notificationImageView.image = UIImage(data: data)
                 }
+                
+            case .Error(let error):
+                print(error.localizedCapitalized)
+                
             }
         }
     }

@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 
 enum DownloadResult {
-    case Success(imageData: Data)
-    case Error(error: String)
+    case success(imageData: Data)
+    case error(error: String)
 }
 
 protocol NetworkManagerProtocol {

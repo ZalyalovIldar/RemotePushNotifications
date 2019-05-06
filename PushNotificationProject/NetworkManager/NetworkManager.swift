@@ -19,9 +19,11 @@ class NetworkManager: NetworkManagerProtocol {
                 completionBlock(.Error(error: error.localizedDescription))
             }
             else {
-                completionBlock(.Success(imageData: data!))
+                DispatchQueue.main.async {
+                    completionBlock(.Success(imageData: data!))
+                }
             }
-            }.resume()
+        }.resume()
     }
     
 }
