@@ -14,5 +14,5 @@ protocol NotificationDetailViewOutput: AnyObject {
     /// сконфигурировать ячейку
     ///
     /// - Parameter withModel: ячейку
-    func setupDetailNotification(withModel: Notification)
+    func setupDetailNotification(with model: NotificationObject)
 }

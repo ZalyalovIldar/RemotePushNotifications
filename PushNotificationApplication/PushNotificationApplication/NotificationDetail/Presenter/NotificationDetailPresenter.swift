@@ -12,10 +12,10 @@ class NotificationDetailPresenter: NotificationDetailViewOutput {
     
     weak var view: NotificationDetailViewInput!
     
-    func setupDetailNotification(withModel: Notification) {
+    func setupDetailNotification(with model: NotificationObject) {
         
-        view.setupName(name: withModel.name)
-        view.setupPicture(dataPicture: withModel.image)
-        view.setupDescription(description: withModel.descriprion)
+        view.setupName(name: model.name)
+        view.setupPicture(dataPicture: model.image)
+        view.setupDescription(description: model.descriprion)
     }
 }

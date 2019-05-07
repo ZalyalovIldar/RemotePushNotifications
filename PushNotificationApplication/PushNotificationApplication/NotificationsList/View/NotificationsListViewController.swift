@@ -15,9 +15,9 @@ class NotificationsListViewController: UIViewController, UITableViewDelegate, UI
    
     @IBOutlet weak var tableView: UITableView!
     
-    lazy var cashedDataSource: NSCache<AnyObject, Notification> = {
+    lazy var cashedDataSource: NSCache<AnyObject, NotificationObject> = {
     
-        let cashe = NSCache<AnyObject, Notification>()
+        let cashe = NSCache<AnyObject, NotificationObject>()
         
         return cashe
     }()
@@ -43,13 +43,13 @@ class NotificationsListViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let models: [Notification]  = dataBaseManager.obtainModels()
+        let models: [NotificationObject]  = dataBaseManager.obtainModels()
         return models.count
    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let models: [Notification]  = dataBaseManager.obtainModels()
+        let models: [NotificationObject]  = dataBaseManager.obtainModels()
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NotificationTableViewCell
         
         if let newCell = cashedDataSource.object(forKey: indexPath.row as AnyObject) {
@@ -57,20 +57,21 @@ class NotificationsListViewController: UIViewController, UITableViewDelegate, UI
             cell.configureCell(notification: newCell)
         } else {
             
-            let newCell = Notification()
+            let newCell = NotificationObject()
             
             newCell.image = models[indexPath.row].image
             newCell.name = models[indexPath.row].name
             newCell.descriprion = models[indexPath.row].descriprion
-            
             cell.configureCell(notification: newCell)
+            
+            self.cashedDataSource.setObject(newCell, forKey: indexPath.row as AnyObject)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let models: [Notification]  = dataBaseManager.obtainModels()
+        let models: [NotificationObject]  = dataBaseManager.obtainModels()
         let cell = models[indexPath.row]
         performSegue(withIdentifier: "detail", sender: cell)
         tableView.deselectRow(at: indexPath, animated: true)
@@ -78,7 +79,7 @@ class NotificationsListViewController: UIViewController, UITableViewDelegate, UI
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "detail", let model = sender as? Notification {
+        if segue.identifier == "detail", let model = sender as? NotificationObject {
             let destinationController = segue.destination as! NotificationDetailViewController
             destinationController.model = model
         }

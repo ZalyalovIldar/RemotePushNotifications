@@ -14,12 +14,12 @@ protocol DataBaseManagerProtocol {
     /// получить массив объектов из бд
     ///
     /// - Returns: массив объектов типа Notification
-    func obtainModels() -> [Notification]
+    func obtainModels() -> [NotificationObject]
     
     /// сохраняет объект типа Notification
     ///
     /// - Parameter model: объект
-    func save(model: Notification)
+    func save(model: NotificationObject)
     
     /// очистить бд
     func clearAll()
@@ -42,13 +42,13 @@ class DataBaseManager: DataBaseManagerProtocol {
         return try! Realm(configuration: .defaultConfiguration)
     }()
     
-    func obtainModels() -> [Notification] {
+    func obtainModels() -> [NotificationObject] {
         
-        let models = mainRealm.objects(Notification.self)
+        let models = mainRealm.objects(NotificationObject.self)
         return Array(models)
     }
     
-    func save(model: Notification) {
+    func save(model: NotificationObject) {
         
         try! mainRealm.write {
             mainRealm.add(model)

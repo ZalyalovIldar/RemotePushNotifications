@@ -16,13 +16,13 @@ class NotificationDetailViewController: UIViewController, NotificationDetailView
     @IBOutlet weak var pictureImage: UIImageView!
     @IBOutlet weak var describtionImage: UILabel!
 
-    var model: Notification?
+    var model: NotificationObject?
     var presenter: NotificationDetailViewOutput!
    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        presenter.setupDetailNotification(withModel: model!)
+        presenter.setupDetailNotification(with: model!)
     }
     
     func setupPicture(dataPicture: Data) {

@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 @objcMembers
-class Notification: Object {
+class NotificationObject: Object {
     
     dynamic var name = String()
     dynamic var image = Data()

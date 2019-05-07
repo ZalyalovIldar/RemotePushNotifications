@@ -28,13 +28,13 @@ class ApplicationRouter {
         }.resume()
     }
    
-    func openController(withModel: Notification) {
+    func openController(with model: NotificationObject) {
         
         let detailViewController = storyboard.instantiateViewController(withIdentifier: "pushed")
         let tabBarViewController = storyboard.instantiateInitialViewController() as! UITabBarController
         let detail = detailViewController as! NotificationDetailViewController
        
-        detail.model = withModel
+        detail.model = model
        
         UIApplication.shared.keyWindow?.rootViewController = tabBarViewController
         
@@ -44,8 +44,8 @@ class ApplicationRouter {
         let table = mainNavigation.viewControllers[0]
         let picture = pictureNavigation.viewControllers[0] as! PictureViewController
         
-        picture.notificationPicture = withModel.image
-        table.performSegue(withIdentifier: "detail", sender: withModel)
+        picture.notificationPicture = model.image
+        table.performSegue(withIdentifier: "detail", sender: model)
         
         UIApplication.shared.keyWindow?.makeKey()
      }

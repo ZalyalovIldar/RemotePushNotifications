@@ -14,7 +14,7 @@ class NotificationTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
    
-    func configureCell(notification: Notification) {
+    func configureCell(notification: NotificationObject) {
        
         avatarImage.image = UIImage(data: notification.image)
         nameLabel.text = notification.name
