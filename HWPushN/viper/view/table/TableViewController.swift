@@ -25,9 +25,8 @@ class TableViewController: UITableViewController {
         
         let array = dataManager.obtainNotifications() ?? []
         
-        for arr in array {
-            notifications.insert(arr, at: 0)
-        }
+        array.forEach { notifications.insert($0, at: 0) }
+        self.tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -54,7 +53,7 @@ class TableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: cellid, for: indexPath) as! TableViewCell
         
-        if let url = URL(string: notifications[indexPath.row].image) {
+        if let url = URL(string: notifications[indexPath.row].imageUrlString) {
             cell.photoImageView.sd_setImage(with: url, completed: nil)
         }
         

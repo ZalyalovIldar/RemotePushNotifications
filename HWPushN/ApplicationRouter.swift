@@ -48,7 +48,7 @@ class ApplicationRouter {
         }
         
         if let img = dict[urlImageString] as? NSString {
-            notificationModel.image = (img as String)
+            notificationModel.imageUrlString = (img as String)
         }
         
         notificationModel.id = getLastId() + 1

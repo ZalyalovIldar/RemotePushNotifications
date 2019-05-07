@@ -24,17 +24,19 @@ class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if let model = currentModel {
+        initItems()
+    }
+    
+    func initItems() {
+        
+        guard let model = currentModel else { return }
             
-            titleLabel.text = model.title
-            descriptionLabel.text = model.descriptionInfo
+        titleLabel.text = model.title
+        descriptionLabel.text = model.descriptionInfo
+        
+        if let url = URL(string: model.imageUrlString) {
             
-            if let url = URL(string: model.image) {
-                
-                DispatchQueue.main.async {
-                    self.photoImageView.sd_setImage(with: url, completed: nil)
-                }
-            }
+            self.photoImageView.sd_setImage(with: url, completed: nil)
         }
     }
 }

@@ -14,7 +14,7 @@ class NotificationModel: Object {
     
     dynamic var id = 0
     dynamic var title = String()
-    dynamic var image = String()
+    dynamic var imageUrlString = String()
     dynamic var descriptionInfo = String()
     
     override static func primaryKey() -> String? {

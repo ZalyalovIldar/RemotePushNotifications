@@ -23,11 +23,9 @@ class PhotoViewController: UIViewController {
         
         if let model = notificationModel {
             
-            if let url = URL(string: model.image) {
+            if let url = URL(string: model.imageUrlString) {
                 
-                DispatchQueue.main.async {
-                    self.photoImageView.sd_setImage(with: url, completed: nil)
-                }
+                self.photoImageView.sd_setImage(with: url, completed: nil)
             }
         }
     }
